@@ -3,7 +3,7 @@ export default function ValuesSection() {
     "Integrity & Trust",
     "Value-Driven Precision", 
     "Strategic Partnership",
-    "Ethical Innovation",
+    "Rapid Innovation",
     "Relentless Improvement"
   ];
 
