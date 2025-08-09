@@ -32,29 +32,12 @@
           headers: {}
         },
         target: '#n8n-chat',
-        mode: 'popup',
-        enableStreaming: true,
-        showWelcomeScreen: true,
-        suggestedQuestions: [
-          {
-            title: 'About Us',
-            questions: [
-              'What services do you offer?',
-              'What makes you unique?',
-            ],
-          },
-          {
-            title: 'Getting Started',
-            questions: [
-              'How does your pricing work?',
-              'What is the first step to start a project?',
-            ],
-          },
-        ],
+        mode: 'window',
         chatInputKey: 'chatInput',
         chatSessionKey: 'sessionId',
         loadPreviousSession: true,
         metadata: {},
+        showWelcomeScreen: false,
         defaultLanguage: 'en',
         initialMessages: [
           'Hi there! I am the LV Assistant.',
@@ -69,6 +52,7 @@
             inputPlaceholder: 'Ask a question...',
           },
         },
+        enableStreaming: false,
       });
     </script>
     
