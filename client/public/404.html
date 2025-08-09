@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | Landis Ventures</title>
+    <script>
+        // GitHub Pages SPA redirect solution
+        // Store the current path and redirect to index with the path as a parameter
+        sessionStorage.setItem('redirect', location.pathname + location.search + location.hash);
+        location.replace(location.origin + location.pathname.split('/').slice(0, -1).concat(['index.html']).join('/'));
+    </script>
+</head>
+<body>
+    <div style="text-align: center; padding: 50px; font-family: Arial, sans-serif;">
+        <h1>Redirecting...</h1>
+        <p>If you are not redirected automatically, <a href="/">click here</a>.</p>
+    </div>
+</body>
+</html>

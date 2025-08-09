@@ -15,6 +15,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   </head>
   <body>
+    <!-- GitHub Pages SPA routing support -->
+    <script>
+      // Check if we need to handle a redirect from GitHub Pages 404
+      (function() {
+        var redirect = sessionStorage.getItem('redirect');
+        if (redirect) {
+          sessionStorage.removeItem('redirect');
+          history.replaceState(null, null, redirect);
+        }
+      })();
+    </script>
+    
     <!-- This is where the chatbot will be mounted -->
     <div id="n8n-chat"></div>
     
