@@ -1,10 +1,18 @@
 import { useState } from "react";
+import { Link, useLocation } from "wouter";
 import { Layers, Menu, X } from "lucide-react";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [location] = useLocation();
 
   const scrollToSection = (sectionId: string) => {
+    // If not on home page, navigate to home first then scroll
+    if (location !== '/') {
+      window.location.href = `/#${sectionId}`;
+      return;
+    }
+    
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -15,10 +23,10 @@ export default function Header() {
   return (
     <header className="fixed top-0 left-0 w-full bg-gray-950/50 backdrop-blur-sm z-50 border-b border-gray-800">
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-        <a href="#" className="flex items-center space-x-2">
+        <Link href="/" className="flex items-center space-x-2">
           <Layers className="w-8 h-8 text-blue-500" />
           <span className="text-xl font-bold text-white">Landis Ventures</span>
-        </a>
+        </Link>
         
         <nav className="hidden md:flex items-center space-x-8">
           <button 
@@ -33,12 +41,12 @@ export default function Header() {
           >
             Our Process
           </button>
-          <button 
-            onClick={() => scrollToSection('values')}
+          <Link 
+            href="/about"
             className="text-gray-300 hover:text-blue-400 transition"
           >
-            Values
-          </button>
+            About
+          </Link>
           <button 
             onClick={() => scrollToSection('contact')}
             className="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-semibold hover:bg-blue-700 transition"
@@ -77,12 +85,13 @@ export default function Header() {
             >
               Our Process
             </button>
-            <button 
-              onClick={() => scrollToSection('values')}
+            <Link 
+              href="/about"
               className="text-gray-300 hover:text-blue-400 transition text-left"
+              onClick={() => setMobileMenuOpen(false)}
             >
-              Values
-            </button>
+              About
+            </Link>
             <button 
               onClick={() => scrollToSection('contact')}
               className="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-semibold hover:bg-blue-700 transition inline-block text-center"

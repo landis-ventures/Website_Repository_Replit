@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useMutation } from "@tanstack/react-query";
+import { useLocation } from "wouter";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
@@ -11,7 +12,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Mail, Phone, Clock } from "lucide-react";
+import { Mail, Phone, Clock, CheckCircle, AlertCircle } from "lucide-react";
 
 const consultationSchema = z.object({
   firstName: z.string().min(1, "First name is required"),
@@ -28,6 +29,8 @@ type ConsultationForm = z.infer<typeof consultationSchema>;
 
 export default function ContactSection() {
   const { toast } = useToast();
+  const [, setLocation] = useLocation();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   
   const form = useForm<ConsultationForm>({
     resolver: zodResolver(consultationSchema),
@@ -45,21 +48,19 @@ export default function ContactSection() {
 
   const mutation = useMutation({
     mutationFn: async (data: Omit<ConsultationForm, 'consent'>) => {
+      setIsSubmitting(true);
       const response = await apiRequest("POST", "/api/consultations", data);
       return response.json();
     },
     onSuccess: () => {
-      toast({
-        title: "Thank you!",
-        description: "Your consultation request has been submitted. We'll contact you within 24 hours.",
-        variant: "default",
-      });
-      form.reset();
+      // Redirect to thank you page instead of showing toast
+      setLocation("/thank-you");
     },
     onError: (error) => {
+      setIsSubmitting(false);
       toast({
-        title: "Error",
-        description: "There was an error submitting your request. Please try again or contact us directly.",
+        title: "Submission Failed",
+        description: "There was an error submitting your request. Please try again or contact us directly at info@landisventures.com",
         variant: "destructive",
       });
       console.error("Form submission error:", error);
@@ -252,11 +253,31 @@ export default function ContactSection() {
               <div className="text-center">
                 <Button
                   type="submit"
-                  disabled={mutation.isPending}
-                  className="cta-button bg-blue-600 text-white px-8 py-4 rounded-md font-semibold text-lg hover:bg-blue-700 transition disabled:opacity-50"
+                  disabled={mutation.isPending || isSubmitting}
+                  className="cta-button bg-blue-600 text-white px-8 py-4 rounded-md font-semibold text-lg hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed min-w-[280px]"
                 >
-                  {mutation.isPending ? "Submitting..." : "Schedule Free Consultation"}
+                  {mutation.isPending || isSubmitting ? (
+                    <div className="flex items-center space-x-2">
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                      <span>Submitting Request...</span>
+                    </div>
+                  ) : (
+                    <div className="flex items-center space-x-2">
+                      <CheckCircle className="w-5 h-5" />
+                      <span>Schedule Free Consultation</span>
+                    </div>
+                  )}
                 </Button>
+                
+                {/* Form validation summary */}
+                {Object.keys(form.formState.errors).length > 0 && (
+                  <div className="mt-4 p-3 bg-red-500/20 border border-red-500/30 rounded-md">
+                    <div className="flex items-center space-x-2 text-red-400">
+                      <AlertCircle className="w-5 h-5" />
+                      <span className="text-sm">Please fill in all required fields correctly</span>
+                    </div>
+                  </div>
+                )}
               </div>
             </form>
           </Form>
