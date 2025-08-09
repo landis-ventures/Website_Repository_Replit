@@ -27,7 +27,48 @@
 
       createChat({
         webhookUrl: 'https://evlandis.app.n8n.cloud/webhook/f8c9e6bf-2ffc-4341-8dbb-1b4a80ffc1e9/chat',
-        target: '#n8n-chat'
+        webhookConfig: {
+          method: 'POST',
+          headers: {}
+        },
+        target: '#n8n-chat',
+        mode: 'popup',
+        enableStreaming: true,
+        showWelcomeScreen: true,
+        suggestedQuestions: [
+          {
+            title: 'About Us',
+            questions: [
+              'What services do you offer?',
+              'What makes you unique?',
+            ],
+          },
+          {
+            title: 'Getting Started',
+            questions: [
+              'How does your pricing work?',
+              'What is the first step to start a project?',
+            ],
+          },
+        ],
+        chatInputKey: 'chatInput',
+        chatSessionKey: 'sessionId',
+        loadPreviousSession: true,
+        metadata: {},
+        defaultLanguage: 'en',
+        initialMessages: [
+          'Hi there! I am the LV Assistant.',
+          'How can I help you learn about Landis Ventures today?'
+        ],
+        i18n: {
+          en: {
+            title: 'Landis Ventures Assistant',
+            subtitle: "Ask me anything about our services or process.",
+            footer: '',
+            getStarted: 'New Conversation',
+            inputPlaceholder: 'Ask a question...',
+          },
+        },
       });
     </script>
     
