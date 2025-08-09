@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landis Ventures | Intelligent Automation for Finance</title>
+
+    <!-- n8n Chat Stylesheet -->
+    <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- N8N CHATBOT STYLING --- */
+        :root {
+            /* Main Theme Colors */
+            --chat--color-primary: #2563eb; /* Main accent color (blue) */
+            --chat--color-secondary: #2563eb; /* User message background */
+            --chat--color-dark: #0f172a; /* Chat header background */
+            --chat--color-light: #f1f5f9; /* Main text color */
+            --chat--color-white: #ffffff;
+            
+            /* Launcher Icon */
+            --chat--toggle--background: var(--chat--color-primary);
+            --chat--toggle--color: var(--chat--color-white);
+            --chat--toggle--size: 60px;
+            --chat--toggle--hover--background: #1d4ed8; /* Darker blue on hover */
+
+            /* Chat Window */
+            --chat--window--background: #030712; /* Match site background */
+            --chat--window--border-radius: 0.75rem;
+            
+            /* Header */
+            --chat--header--background: #0f172a; /* Dark blue-gray */
+            --chat--header--color: var(--chat--color-light);
+            --chat--header--padding: 1rem 1.25rem;
+            --chat--heading--font-size: 1.25rem;
+            --chat--subtitle--font-size: 0.9rem;
+            --chat--subtitle--color: #94a3b8; /* Lighter gray for subtitle */
+
+            /* Messages */
+            --chat--message--bot--background: #1e293b; /* Slightly lighter dark blue */
+            --chat--message--bot--color: var(--chat--color-light);
+            --chat--message--user--background: var(--chat--color-secondary);
+            --chat--message--user--color: var(--chat--color-white);
+            --chat--message--border-radius: 0.5rem;
+
+            /* Other */
+            --chat--border-radius: 0.5rem;
+        }
+
+        /* Custom styles for the rest of the page */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #030712; /* A very dark blue-gray */
+            color: #f9fafb; /* Off-white for text */
+        }
+
+        .hero-gradient {
+            background: radial-gradient(circle at 30% 0%, rgba(29, 78, 216, 0.15), transparent 40%);
+        }
+
+        .section-gradient {
+             background: radial-gradient(circle at 50% 100%, rgba(29, 78, 216, 0.1), transparent 50%);
+        }
+
+        .cta-button {
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(29, 78, 216, 0.2);
+        }
+        
+        .service-card, .value-card {
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .service-card:hover, .value-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(59, 130, 246, 0.5);
+            background-color: rgba(29, 78, 216, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- This is where the chatbot will be mounted -->
+    <div id="n8n-chat"></div>
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 w-full bg-gray-950/50 backdrop-blur-sm z-50 border-b border-gray-800">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="flex items-center space-x-2">
+                <!-- SVG Logo -->
+                <svg class="w-8 h-8 text-blue-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="text-xl font-bold text-white">Landis Ventures</span>
+            </a>
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#services" class="text-gray-300 hover:text-blue-400 transition">Services</a>
+                <a href="#process" class="text-gray-300 hover:text-blue-400 transition">Our Process</a>
+                <a href="#values" class="text-gray-300 hover:text-blue-400 transition">Values</a>
+                <a href="#contact" class="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-semibold hover:bg-blue-700 transition">Get a Quote</a>
+            </nav>
+            <button class="md:hidden text-white">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-gradient pt-32 pb-20 md:pt-48 md:pb-32">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-6xl font-bold text-white leading-tight mb-4">
+                    Intelligent Automation for Financial Services
+                </h1>
+                <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-8">
+                    We unlock new levels of profitability and efficiency by designing and implementing intelligent automation solutions that streamline your operations and drive measurable growth.
+                </p>
+                <a href="#contact" class="cta-button bg-blue-600 text-white px-8 py-4 rounded-md font-semibold text-lg hover:bg-blue-700 inline-block">
+                    Schedule Your Free Consultation
+                </a>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="py-20 section-gradient">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white">Our Services</h2>
+                    <p class="text-gray-400 mt-2 max-w-2xl mx-auto">We solve complex operational challenges with a focused suite of automation services.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Service Card 1 -->
+                    <div class="service-card bg-gray-900/50 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-white mb-2">Robotic Process Automation (RPA)</h3>
+                        <p class="text-gray-400">Automating repetitive, rule-based tasks within your existing desktop applications, web portals, and legacy systems.</p>
+                    </div>
+                    <!-- Service Card 2 -->
+                    <div class="service-card bg-gray-900/50 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-white mb-2">Intelligent Document Processing (IDP)</h3>
+                        <p class="text-gray-400">Using AI and OCR to automatically capture, extract, and validate data from invoices, forms, and financial statements.</p>
+                    </div>
+                    <!-- Service Card 3 -->
+                    <div class="service-card bg-gray-900/50 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-white mb-2">Data Processing & Reconciliation</h3>
+                        <p class="text-gray-400">Building robust automations to aggregate data, perform complex reconciliation, and generate actionable reports.</p>
+                    </div>
+                    <!-- Service Card 4 -->
+                    <div class="service-card bg-gray-900/50 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-white mb-2">End-to-End Workflow Automation</h3>
+                        <p class="text-gray-400">Designing holistic solutions that connect disparate systems and create seamless, autonomous business processes.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Process Section -->
+        <section id="process" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white">Our Structured 5-Phase Process</h2>
+                    <p class="text-gray-400 mt-2 max-w-2xl mx-auto">We ensure high-quality, sustainable results through a proven methodology.</p>
+                </div>
+                <!-- Process Timeline -->
+                <div class="relative">
+                    <!-- The connecting line -->
+                    <div class="hidden md:block absolute top-5 left-0 w-full h-0.5 bg-gray-700"></div>
+                    <div class="grid md:grid-cols-5 gap-8 relative">
+                        <!-- Step 1 -->
+                        <div class="text-center">
+                            <div class="relative mb-4">
+                                <div class="w-10 h-10 mx-auto rounded-full bg-blue-600 text-white flex items-center justify-center font-bold z-10 relative">1</div>
+                            </div>
+                            <h3 class="font-semibold text-white mb-1">Discovery & Analysis</h3>
+                            <p class="text-sm text-gray-400">Understanding your goals and assessing ROI.</p>
+                        </div>
+                        <!-- Step 2 -->
+                        <div class="text-center">
+                            <div class="relative mb-4">
+                                <div class="w-10 h-10 mx-auto rounded-full bg-blue-600 text-white flex items-center justify-center font-bold z-10 relative">2</div>
+                            </div>
+                            <h3 class="font-semibold text-white mb-1">Solution Design</h3>
+                            <p class="text-sm text-gray-400">Creating the blueprint for your automation.</p>
+                        </div>
+                        <!-- Step 3 -->
+                        <div class="text-center">
+                             <div class="relative mb-4">
+                                <div class="w-10 h-10 mx-auto rounded-full bg-blue-600 text-white flex items-center justify-center font-bold z-10 relative">3</div>
+                            </div>
+                            <h3 class="font-semibold text-white mb-1">Development & Testing</h3>
+                            <p class="text-sm text-gray-400">Building the bot and conducting rigorous UAT.</p>
+                        </div>
+                        <!-- Step 4 -->
+                        <div class="text-center">
+                             <div class="relative mb-4">
+                                <div class="w-10 h-10 mx-auto rounded-full bg-blue-600 text-white flex items-center justify-center font-bold z-10 relative">4</div>
+                            </div>
+                            <h3 class="font-semibold text-white mb-1">Deployment & Launch</h3>
+                            <p class="text-sm text-gray-400">Moving the solution to production with training.</p>
+                        </div>
+                        <!-- Step 5 -->
+                        <div class="text-center">
+                             <div class="relative mb-4">
+                                <div class="w-10 h-10 mx-auto rounded-full bg-blue-600 text-white flex items-center justify-center font-bold z-10 relative">5</div>
+                            </div>
+                            <h3 class="font-semibold text-white mb-1">Support & Maintenance</h3>
+                            <p class="text-sm text-gray-400">Ensuring long-term success and reliability.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Values Section -->
+        <section id="values" class="py-20 section-gradient">
+             <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white">Our Core Values</h2>
+                    <p class="text-gray-400 mt-2 max-w-2xl mx-auto">The principles that guide every decision we make.</p>
+                </div>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
+                    <div class="value-card text-center bg-gray-900/50 p-6 rounded-lg">
+                        <h3 class="font-semibold text-white">Integrity & Trust</h3>
+                    </div>
+                    <div class="value-card text-center bg-gray-900/50 p-6 rounded-lg">
+                        <h3 class="font-semibold text-white">Value-Driven Precision</h3>
+                    </div>
+                    <div class="value-card text-center bg-gray-900/50 p-6 rounded-lg">
+                        <h3 class="font-semibold text-white">Strategic Partnership</h3>
+                    </div>
+                    <div class="value-card text-center bg-gray-900/50 p-6 rounded-lg">
+                        <h3 class="font-semibold text-white">Ethical Innovation</h3>
+                    </div>
+                    <div class="value-card text-center bg-gray-900/50 p-6 rounded-lg">
+                        <h3 class="font-semibold text-white">Relentless Improvement</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact / CTA Section -->
+        <section id="contact" class="py-24">
+            <div class="container mx-auto px-6">
+                <div class="bg-gray-900 rounded-lg p-10 md:p-16 text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white">Ready to Automate Your Success?</h2>
+                    <p class="text-gray-300 mt-4 mb-8 max-w-2xl mx-auto">Let's discuss how we can solve your most pressing operational challenges and unlock new opportunities for growth. The first step is a complimentary consultation.</p>
+                    <a href="mailto:contact@landis.ventures" class="cta-button bg-blue-600 text-white px-8 py-4 rounded-md font-semibold text-lg hover:bg-blue-700 inline-block">
+                        Get Your Free Quote
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-800">
+        <div class="container mx-auto px-6 py-8 text-center text-gray-400">
+            <p>&copy; 2025 Landis Ventures. All Rights Reserved.</p>
+            <p class="text-sm mt-2">Intelligent Automation for the Modern Financial Firm</p>
+        </div>
+    </footer>
+    
+    <script type="module">
+        import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+        createChat({
+            webhookUrl: 'https://evlandis.app.n8n.cloud/webhook/f8c9e6bf-2ffc-4341-8dbb-1b4a80ffc1e9/chat',
+            webhookConfig: {
+                method: 'POST',
+                headers: {}
+            },
+            target: '#n8n-chat',
+            mode: 'popup',
+            enableStreaming: true,
+            showWelcomeScreen: true,
+            suggestedQuestions: [
+                {
+                    title: 'About Us',
+                    questions: [
+                        'What services do you offer?',
+                        'What makes you unique?',
+                    ],
+                },
+                {
+                    title: 'Getting Started',
+                    questions: [
+                        'How does your pricing work?',
+                        'What is the first step to start a project?',
+                    ],
+                },
+            ],
+            chatInputKey: 'chatInput',
+            chatSessionKey: 'sessionId',
+            loadPreviousSession: true,
+            metadata: {},
+            defaultLanguage: 'en',
+            initialMessages: [
+                'Hi there! I am the LV Assistant.',
+                'How can I help you learn about Landis Ventures today?'
+            ],
+            i18n: {
+                en: {
+                    title: 'Landis Ventures Assistant',
+                    subtitle: "Ask me anything about our services or process.",
+                    footer: '',
+                    getStarted: 'New Conversation',
+                    inputPlaceholder: 'Ask a question...',
+                },
+            },
+        });
+    </script>
+</body>
+</html>

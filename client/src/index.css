@@ -41,6 +41,42 @@
   --landis-border: hsl(215, 16%, 27%);
   --landis-gray-900: hsl(220, 18%, 20%);
   --landis-gray-950: hsl(224, 71%, 4%);
+  
+  /* --- N8N CHATBOT STYLING --- */
+  /* Main Theme Colors */
+  --chat--color-primary: #2563eb; /* Main accent color (blue) */
+  --chat--color-secondary: #2563eb; /* User message background */
+  --chat--color-dark: #0f172a; /* Chat header background */
+  --chat--color-light: #f1f5f9; /* Main text color */
+  --chat--color-white: #ffffff;
+  
+  /* Launcher Icon */
+  --chat--toggle--background: var(--chat--color-primary);
+  --chat--toggle--color: var(--chat--color-white);
+  --chat--toggle--size: 60px;
+  --chat--toggle--hover--background: #1d4ed8; /* Darker blue on hover */
+
+  /* Chat Window */
+  --chat--window--background: #030712; /* Match site background */
+  --chat--window--border-radius: 0.75rem;
+  
+  /* Header */
+  --chat--header--background: #0f172a; /* Dark blue-gray */
+  --chat--header--color: var(--chat--color-light);
+  --chat--header--padding: 1rem 1.25rem;
+  --chat--heading--font-size: 1.25rem;
+  --chat--subtitle--font-size: 0.9rem;
+  --chat--subtitle--color: #94a3b8; /* Lighter gray for subtitle */
+
+  /* Messages */
+  --chat--message--bot--background: #1e293b; /* Slightly lighter dark blue */
+  --chat--message--bot--color: var(--chat--color-light);
+  --chat--message--user--background: var(--chat--color-secondary);
+  --chat--message--user--color: var(--chat--color-white);
+  --chat--message--border-radius: 0.5rem;
+
+  /* Other */
+  --chat--border-radius: 0.5rem;
 }
 
 .dark {
@@ -138,61 +174,5 @@
   
   .mobile-menu.active {
     transform: translateX(0);
-  }
-  
-  /* n8n Chat Widget Custom Styling */
-  .n8n-chat {
-    --n8n-chat-primary: #3B82F6 !important;
-    --n8n-chat-background: rgba(17, 24, 39, 0.95) !important;
-    --n8n-chat-text: #F9FAFB !important;
-    --n8n-chat-border: rgba(75, 85, 99, 0.3) !important;
-    --n8n-chat-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.5) !important;
-  }
-  
-  .n8n-chat-button {
-    background: linear-gradient(135deg, #3B82F6, #1D4ED8) !important;
-    box-shadow: 0 4px 14px 0 rgba(59, 130, 246, 0.4) !important;
-    transition: all 0.3s ease !important;
-  }
-  
-  .n8n-chat-button:hover {
-    transform: translateY(-2px) !important;
-    box-shadow: 0 6px 20px 0 rgba(59, 130, 246, 0.6) !important;
-  }
-  
-  .n8n-chat-window {
-    background: rgba(17, 24, 39, 0.98) !important;
-    backdrop-filter: blur(20px) !important;
-    border: 1px solid rgba(75, 85, 99, 0.3) !important;
-    border-radius: 12px !important;
-  }
-  
-  .n8n-chat-messages {
-    background: transparent !important;
-  }
-  
-  .n8n-chat-message-user {
-    background: linear-gradient(135deg, #3B82F6, #1D4ED8) !important;
-    color: white !important;
-    border-radius: 18px 18px 4px 18px !important;
-  }
-  
-  .n8n-chat-message-bot {
-    background: rgba(75, 85, 99, 0.3) !important;
-    color: #F9FAFB !important;
-    border-radius: 18px 18px 18px 4px !important;
-    border: 1px solid rgba(75, 85, 99, 0.2) !important;
-  }
-  
-  .n8n-chat-input {
-    background: rgba(31, 41, 55, 0.8) !important;
-    border: 1px solid rgba(75, 85, 99, 0.5) !important;
-    color: #F9FAFB !important;
-    border-radius: 8px !important;
-  }
-  
-  .n8n-chat-input:focus {
-    border-color: #3B82F6 !important;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
   }
 }
